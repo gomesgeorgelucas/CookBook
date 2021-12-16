@@ -46,6 +46,18 @@ public class Catalogo {
         return null;
     }
 
+    /**
+     * Returns index of recipe.
+     * @param receita
+     * @return -1 if not found.
+     */
+    public int getIndex(Receita receita) {
+        if (getReceita(receita.getNome()) !=  null) {
+            return this.receitas.indexOf(receita);
+        }
+        return -1;
+    }
+
     public Receita getRandom() {
         if (receitas.isEmpty()) return null;
 
