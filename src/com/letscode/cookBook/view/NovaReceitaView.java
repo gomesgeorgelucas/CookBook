@@ -7,7 +7,6 @@ import com.letscode.cookBook.enums.Categoria;
 import com.letscode.cookBook.enums.TipoMedida;
 import com.letscode.cookBook.enums.TipoRendimento;
 
-import javax.sound.midi.Soundbank;
 import java.util.*;
 
 /**
@@ -158,7 +157,7 @@ public class NovaReceitaView {
                 } while (tipoMedida < 0 || tipoMedida >= TipoMedida.values().length);
 
                 do {
-                    System.out.println("Qual é a quantidade em/de " + TipoMedida.values()[tipoMedida].name() + "?");
+                    System.out.println("Qual é a quantidade de " + TipoMedida.values()[tipoMedida].name() + "?");
                     quantidade = new Scanner(System.in).nextDouble();
                     if (quantidade <= 0) {
                         System.out.println("Quantidade inválida!");

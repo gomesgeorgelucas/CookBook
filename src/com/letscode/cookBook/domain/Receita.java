@@ -99,16 +99,15 @@ public class Receita {
         return nome.hashCode();
     }
 
-//    @Override
-//    public String toString() {
-//        int segundos = tempoPreparo % 60;
-//        int minutos = tempoPreparo > 60 ? tempoPreparo % (60*60) : 0;
-//        int horas = tempoPreparo > 60*60 ? tempoPreparo % (60*60*24) : 0;
-//        String tempo = horas > 0 ? horas + " horas " : "";
-//        tempo += minutos > 0 ? minutos + " minutos " : "";
-//        tempo += segundos > 0 ? segundos + " segundos " : "";
-//        return String.format("%s%n\t%s%n%nRendimento: %s%nTempo: %s%nIngredientes:%n%s%nModo de preparo:%n%s", nome, categoria, rendimento, tempo, ingredientes, modoPreparo);
-//    }
+    public String toString2() {
+        int segundos = tempoPreparo % 60;
+        int minutos = tempoPreparo > 60 ? tempoPreparo % (60*60) : 0;
+        int horas = tempoPreparo > 60*60 ? tempoPreparo % (60*60*24) : 0;
+        String tempo = horas > 0 ? horas + " horas " : "";
+        tempo += minutos > 0 ? minutos + " minutos " : "";
+        tempo += segundos > 0 ? segundos + " segundos " : "";
+        return String.format("%s%n\t%s%n%nRendimento: %s%nTempo: %s%nIngredientes:%n%s%nModo de preparo:%n%s", nome, categoria, rendimento, tempo, ingredientes, modoPreparo);
+    }
 
     @Override
     public String toString() {
@@ -116,7 +115,17 @@ public class Receita {
         int horas = tempoPreparo >= 60 ? tempoPreparo / 60 : 0;
         String tempo = horas > 0 ? horas + " horas " : "";
         tempo += minutos > 0 ? minutos + " minutos " : "";
-        return String.format("%s%n\t%s%n%nRendimento: %s%nTempo: %s%nIngredientes:%n%s%nModo de preparo:%n%s", nome, categoria, rendimento, tempo, ingredientes, modoPreparo);
+        String ingredientes  = "";
+        for (Ingrediente ingrediente : this.ingredientes) {
+            ingredientes += " " + ingrediente.toString();
+        }
+
+        String modoPreparo = "";
+        for (String modo : this.modoPreparo) {
+            modoPreparo += " " + modo.toString()+ "\n";
+        }
+
+        return String.format("%s%n\t%s%n%nRendimento: %s%nTempo: %s%nIngredientes:%n%sModo de preparo:%n%s", nome, categoria, rendimento, tempo, ingredientes, modoPreparo);
     }
 }
 

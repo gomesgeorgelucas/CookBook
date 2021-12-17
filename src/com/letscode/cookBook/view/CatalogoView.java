@@ -1,8 +1,16 @@
 package com.letscode.cookBook.view;
 
 import com.letscode.cookBook.controller.Catalogo;
+import com.letscode.cookBook.domain.Ingrediente;
 import com.letscode.cookBook.domain.Receita;
+import com.letscode.cookBook.domain.Rendimento;
 import com.letscode.cookBook.enums.Categoria;
+import com.letscode.cookBook.enums.TipoMedida;
+import com.letscode.cookBook.enums.TipoRendimento;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 import java.util.Scanner;
 
 public class CatalogoView {
@@ -12,6 +20,98 @@ public class CatalogoView {
     private int curIndex = -1;
 
     boolean debug = true;
+
+    public CatalogoView() {
+        if(debug) {
+            String nome = "Receita teste";
+            Categoria categoria = Categoria.CARNES;
+            int tempoPreparo = 100;
+            Rendimento rendimento = new Rendimento(100, TipoRendimento.COPOS);
+            List<Ingrediente> ingredientes = new ArrayList<>();
+            ingredientes.add(new Ingrediente("Ingrediente 1", 1.0, TipoMedida.GOTAS));
+            ingredientes.add(new Ingrediente("Ingrediente 2", 2.0, TipoMedida.CHICARAS));
+            ingredientes.add(new Ingrediente("Ingrediente 3", 3.0, TipoMedida.COLHERES_DE_SOPA));
+            ingredientes.add(new Ingrediente("Ingrediente 4", 4.0, TipoMedida.KILOS));
+            List<String> modoPreparo = new ArrayList<>();
+            modoPreparo.add("Passo 1 ");
+            modoPreparo.add("Passo 2 ".repeat(new Random().nextInt(10)));
+            modoPreparo.add("Passo 3 ".repeat(new Random().nextInt(10)));
+            modoPreparo.add("Passo 4 ".repeat(new Random().nextInt(10)));
+            Receita receita = new Receita(nome, categoria, tempoPreparo, rendimento, ingredientes, modoPreparo);
+            controller.add(receita);
+
+            this.receita = receita;
+            curIndex = 0;
+
+            nome = "Receita teste 2";
+            categoria = Categoria.AVES;
+            tempoPreparo = 100;
+            rendimento = new Rendimento(100, TipoRendimento.COPOS);
+            ingredientes = new ArrayList<>();
+            ingredientes.add(new Ingrediente("Ingrediente 1", 1.0, TipoMedida.GOTAS));
+            ingredientes.add(new Ingrediente("Ingrediente 2", 2.0, TipoMedida.CHICARAS));
+            ingredientes.add(new Ingrediente("Ingrediente 3", 3.0, TipoMedida.COLHERES_DE_SOPA));
+            ingredientes.add(new Ingrediente("Ingrediente 4", 4.0, TipoMedida.KILOS));
+            modoPreparo = new ArrayList<>();
+            modoPreparo.add("Passo 1 ");
+            modoPreparo.add("Passo 2 ".repeat(new Random().nextInt(10)));
+            modoPreparo.add("Passo 3 ".repeat(new Random().nextInt(10)));
+            modoPreparo.add("Passo 4 ".repeat(new Random().nextInt(10)));
+            receita = new Receita(nome, categoria, tempoPreparo, rendimento, ingredientes, modoPreparo);
+            controller.add(receita);
+
+            nome = "Receita teste 3";
+            categoria = Categoria.AVES;
+            tempoPreparo = 100;
+            rendimento = new Rendimento(100, TipoRendimento.COPOS);
+            ingredientes = new ArrayList<>();
+            ingredientes.add(new Ingrediente("Ingrediente 1", 1.0, TipoMedida.GOTAS));
+            ingredientes.add(new Ingrediente("Ingrediente 2", 2.0, TipoMedida.CHICARAS));
+            ingredientes.add(new Ingrediente("Ingrediente 3", 3.0, TipoMedida.COLHERES_DE_SOPA));
+            ingredientes.add(new Ingrediente("Ingrediente 4", 4.0, TipoMedida.KILOS));
+            modoPreparo = new ArrayList<>();
+            modoPreparo.add("Passo 1 ");
+            modoPreparo.add("Passo 2 ".repeat(new Random().nextInt(10)));
+            modoPreparo.add("Passo 3 ".repeat(new Random().nextInt(10)));
+            modoPreparo.add("Passo 4 ".repeat(new Random().nextInt(10)));
+            receita = new Receita(nome, categoria, tempoPreparo, rendimento, ingredientes, modoPreparo);
+            controller.add(receita);
+
+            nome = "Receita teste 4";
+            categoria = Categoria.AVES;
+            tempoPreparo = 100;
+            rendimento = new Rendimento(100, TipoRendimento.COPOS);
+            ingredientes = new ArrayList<>();
+            ingredientes.add(new Ingrediente("Ingrediente 1", 1.0, TipoMedida.GOTAS));
+            ingredientes.add(new Ingrediente("Ingrediente 2", 2.0, TipoMedida.CHICARAS));
+            ingredientes.add(new Ingrediente("Ingrediente 3", 3.0, TipoMedida.COLHERES_DE_SOPA));
+            ingredientes.add(new Ingrediente("Ingrediente 4", 4.0, TipoMedida.KILOS));
+            modoPreparo = new ArrayList<>();
+            modoPreparo.add("Passo 1 ");
+            modoPreparo.add("Passo 2 ".repeat(new Random().nextInt(10)));
+            modoPreparo.add("Passo 3 ".repeat(new Random().nextInt(10)));
+            modoPreparo.add("Passo 4 ".repeat(new Random().nextInt(10)));
+            receita = new Receita(nome, categoria, tempoPreparo, rendimento, ingredientes, modoPreparo);
+            controller.add(receita);
+
+            nome = "Receita teste 5";
+            categoria = Categoria.AVES;
+            tempoPreparo = 100;
+            rendimento = new Rendimento(100, TipoRendimento.COPOS);
+            ingredientes = new ArrayList<>();
+            ingredientes.add(new Ingrediente("Ingrediente 1", 1.0, TipoMedida.GOTAS));
+            ingredientes.add(new Ingrediente("Ingrediente 2", 2.0, TipoMedida.CHICARAS));
+            ingredientes.add(new Ingrediente("Ingrediente 3", 3.0, TipoMedida.COLHERES_DE_SOPA));
+            ingredientes.add(new Ingrediente("Ingrediente 4", 4.0, TipoMedida.KILOS));
+            modoPreparo = new ArrayList<>();
+            modoPreparo.add("Passo 1 ");
+            modoPreparo.add("Passo 2 ".repeat(new Random().nextInt(10)));
+            modoPreparo.add("Passo 3 ".repeat(new Random().nextInt(10)));
+            modoPreparo.add("Passo 4 ".repeat(new Random().nextInt(10)));
+            receita = new Receita(nome, categoria, tempoPreparo, rendimento, ingredientes, modoPreparo);
+            controller.add(receita);
+        }
+    }
 
     private void showHeader() {
         ScreenUtil.printTextLine("", 80, true, '=');
@@ -24,6 +124,7 @@ public class CatalogoView {
     }
 
     private void showReceita(Receita receita) {
+        //ScreenUtil.printTextLine(receita.toString(), 80, false, '=');
         System.out.println(receita.toString());
     }
 
@@ -82,7 +183,6 @@ public class CatalogoView {
 
         if (debug) {
             System.out.println("Curent Index: " + curIndex);
-
         }
     }
 

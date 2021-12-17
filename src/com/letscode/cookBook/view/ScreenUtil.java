@@ -20,12 +20,16 @@ public class ScreenUtil {
             text = text.substring(lineLen);
             printTextLine(line, lineLen, centerInScreen, fillChar);
         }
+
         if (centerInScreen) {
             int spaces = (lineLen - text.length()) / 2;
             if (spaces > 0) {
-                System.out.printf("%" + spaces + "s %s %" + spaces + "s%n", fillChar, text, fillChar);
+                System.out.printf("%s %s %s%n",
+                        String.valueOf(fillChar).repeat(spaces),
+                        text,
+                        String.valueOf(fillChar).repeat(spaces));
             } else {
-                System.out.printf(" %" + lineLen + "s %n", text);
+                System.out.printf(" %s %n", text.repeat(lineLen));
             }
         } else {
             System.out.println(text);

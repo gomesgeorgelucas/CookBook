@@ -4,12 +4,12 @@
 ### Livro de Receitas
 
 - [x] Funcional.
-- [ ] Corrigir exibição incorreta (Utilizar ScreenUtils).
+- [x] Corrigir exibição incorreta (Utilizar ScreenUtils).
 - [ ] Verificar métodos não utilizados.
 - [ ] Otimizar métodos e substituir recursões quando necessário.
-- [ ] Criar 5 receitas para debugar.
+- [x] Criar 5 receitas para debugar.
 - [ ] Revisitar métodos de entrada e saída.
-- [ ] Verificar exeções.
+- [ ] Verificar exceções.
 - [ ] Fazer limpeza.
 - [ ] Remover modo debug ou utilizar argumentos (args[]).
 

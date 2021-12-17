@@ -5,11 +5,11 @@ public enum TipoMedida {
     GRAMAS,
     LITROS,
     MILILITROS,
-    CHICARA,
-    COPO,
-    COLHER_DE_SOPA,
-    COLHER_DE_CHA,
-    COLHER_DE_CAFE,
+    CHICARAS,
+    COPOS,
+    COLHERES_DE_SOPA,
+    COLHERES_DE_CHA,
+    COLHERES_DE_CAFE,
     GOTAS,
     UNIDADES
 }
