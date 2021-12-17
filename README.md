@@ -12,9 +12,9 @@
 - [x] Revisitar métodos de entrada e saída.
 - [x] Verificar exceções.
 - [x] Fazer limpeza.
-- [ ] Remover modo debug ou utilizar argumentos (args[]).
+- [x] Remover modo debug ou utilizar argumentos (args[]).
 
-
+//TODO - Melhorar entrada de ingredientes para reconhecer espaço entre os dígitos.
 
 
 

@@ -1,53 +1,17 @@
 package com.letscode.cookBook.view;
 
 import com.letscode.cookBook.controller.Catalogo;
-import com.letscode.cookBook.domain.Ingrediente;
 import com.letscode.cookBook.domain.Receita;
-import com.letscode.cookBook.domain.Rendimento;
 import com.letscode.cookBook.enums.Categoria;
-import com.letscode.cookBook.enums.TipoMedida;
-import com.letscode.cookBook.enums.TipoRendimento;
 
 import java.util.*;
 
-@SuppressWarnings("ConstantConditions")
 public class CatalogoView {
     private final Receita NONE_FOUND = new Receita("Nenhuma receita encontrada", Categoria.PRATO_UNICO);
     private Receita receita;
     Catalogo controller = new Catalogo();
     private int curIndex = -1;
     boolean run = true;
-
-    boolean debug = true;
-
-    public CatalogoView() {
-        if (debug) {
-
-            for (int i = 0; i < new Random().nextInt(10); i++) {
-                String nome = "Receita " + (i + 1);
-                Categoria categoria = Categoria.values()[new Random().nextInt(12)];
-                int tempoPreparo = new Random().nextInt(600);
-                Rendimento rendimento = new Rendimento(100, TipoRendimento.values()[new Random().nextInt(2)]);
-                List<Ingrediente> ingredientes = new ArrayList<>();
-                ingredientes.add(new Ingrediente("Ingrediente 1", Math.floor(new Random().nextDouble() * 60), TipoMedida.values()[new Random().nextInt(10)]));
-                ingredientes.add(new Ingrediente("Ingrediente 2", Math.floor(new Random().nextDouble() * 60), TipoMedida.values()[new Random().nextInt(10)]));
-                ingredientes.add(new Ingrediente("Ingrediente 3", Math.floor(new Random().nextDouble() * 60), TipoMedida.values()[new Random().nextInt(10)]));
-                ingredientes.add(new Ingrediente("Ingrediente 4", Math.floor(new Random().nextDouble() * 60), TipoMedida.values()[new Random().nextInt(10)]));
-                List<String> modoPreparo = new ArrayList<>();
-                modoPreparo.add("Passos ".repeat(new Random().nextInt(10)));
-                modoPreparo.add("Passos ".repeat(new Random().nextInt(10)));
-                modoPreparo.add("Passos ".repeat(new Random().nextInt(10)));
-                modoPreparo.add("Passos ".repeat(new Random().nextInt(10)));
-                Receita receita = new Receita(nome, categoria, tempoPreparo, rendimento, ingredientes, modoPreparo);
-                controller.add(receita);
-
-                if (i == 0) {
-                    this.receita = receita;
-                    curIndex = 0;
-                }
-            }
-        }
-    }
 
     private void showHeader() {
         ScreenUtil.printTextLine("", 80, true, '=');
@@ -128,10 +92,6 @@ public class CatalogoView {
         ScreenUtil.printTextLine("X: Sair", 80, true);
         ScreenUtil.printTextLine("", 80, true, '=');
         ScreenUtil.printTextLine("#: ", 80);
-
-        if (debug) {
-            System.out.println("Current Index: " + curIndex);
-        }
     }
 
     public void search() {
@@ -152,6 +112,7 @@ public class CatalogoView {
         this.run = false;
     }
 
+    @SuppressWarnings("EnhancedSwitchMigration")
     public void show() {
         loadView();
         String option;
