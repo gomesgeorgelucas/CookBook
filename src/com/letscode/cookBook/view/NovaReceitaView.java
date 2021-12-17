@@ -18,7 +18,7 @@ public class NovaReceitaView {
     List<Ingrediente> ingredientes = new ArrayList<>();
     List<String> modoPreparo = new ArrayList<>();
 
-    public Receita nova() throws NumberFormatException, InputMismatchException {
+    public Receita nova() {
         this.receita = new Receita(askNome(), askCategoria(), askTempoPreparo(),
                 askRendimento(), askIngredientes(), askModoPreparo());
         return receita;
@@ -36,47 +36,44 @@ public class NovaReceitaView {
     }
 
     private Categoria askCategoria() {
-        int categoria;
-        System.out.println("Qual a categoria da receita?");
-        for (Categoria cat : Categoria.values()) {
-            System.out.printf("%d - %s%n", cat.ordinal(), cat.name());
-        }
-        try {
-            categoria = new Scanner(System.in).nextInt();
+        int categoria = -1;
+        do {
+            try {
+                System.out.println("Qual a categoria da receita?");
+                for (Categoria cat : Categoria.values()) {
+                    System.out.printf("%d - %s%n", cat.ordinal(), cat.name());
+                }
 
-            if (categoria < 0 || categoria >= Categoria.values().length) {
+                categoria = new Scanner(System.in).nextInt();
+
+                if (categoria < 0 || categoria >= Categoria.values().length) {
+                    System.out.println("Categoria inválida!");
+                }
+            } catch (InputMismatchException | ArrayIndexOutOfBoundsException e) {
                 System.out.println("Categoria inválida!");
-                askCategoria();
             }
-            this.categoria = Categoria.values()[categoria];
-            return this.categoria;
-        } catch (InputMismatchException e) {
-            System.out.println("Categoria inválida!");
-            askCategoria();
-        }
+
+        } while (categoria < 0 || categoria >= Categoria.values().length);
+
+        this.categoria = Categoria.values()[categoria];
 
         return this.categoria;
     }
 
     private int askTempoPreparo() {
-        String tempo;
+        int tempo;
         System.out.println("Qual o tempo de preparo em minutos?");
-        tempo = new Scanner(System.in).nextLine();
-
-        if (tempo.isBlank()) {
-            System.out.println("Tempo inválido! Tente novamente!");
-            askTempoPreparo();
-        }
 
         try {
-            this.tempoPreparo = Integer.parseInt(tempo);
-            if (this.tempoPreparo < 0) {
+            tempo = new Scanner(System.in).nextInt();
+            if (tempo <= 0) {
                 System.out.println("Tempo inválido! Tente novamente!");
                 askTempoPreparo();
             }
-        } catch (NumberFormatException e) {
+
+            this.tempoPreparo = tempo;
+        } catch (InputMismatchException e) {
             System.out.println("Tempo inválido! Tente novamente!");
-            this.tempoPreparo = 0;
             askTempoPreparo();
         }
 
@@ -84,37 +81,44 @@ public class NovaReceitaView {
     }
 
     private Rendimento askRendimento() {
-        System.out.println("Qual é o tipo de rendimento da receita?");
-        int tipoRendimento;
-        int quantidade;
-        for (TipoRendimento tipo : TipoRendimento.values()) {
-            System.out.printf("%d - %s%n", tipo.ordinal(), tipo.name());
-        }
-        try {
-            tipoRendimento = new Scanner(System.in).nextInt();
+        int tipoRendimento = -1;
+        int quantidade = -1;
 
-            if (tipoRendimento < 0 || tipoRendimento >= Categoria.values().length) {
-                System.out.println("Tipo inválido!");
-                askRendimento();
+        do {
+            System.out.println("Qual é o tipo de rendimento da receita?");
+            for (TipoRendimento tipo : TipoRendimento.values()) {
+                System.out.printf("%d - %s%n", tipo.ordinal(), tipo.name());
             }
 
+            try {
+                tipoRendimento = new Scanner(System.in).nextInt();
+
+                if (tipoRendimento < 0 || tipoRendimento >= Categoria.values().length) {
+                    System.out.println("Tipo inválido!");
+                }
+
+            } catch (InputMismatchException | ArrayIndexOutOfBoundsException e) {
+                System.out.println("Tipo inválido!");
+            }
+
+        } while (tipoRendimento < 0 || tipoRendimento >= Categoria.values().length);
+        do {
             System.out.println("Qual é a quantidade de " + TipoRendimento.values()[tipoRendimento].name() + "?");
 
-            quantidade = new Scanner(System.in).nextInt();
+            try {
 
-            if (quantidade <= 0) {
+                quantidade = new Scanner(System.in).nextInt();
+
+                if (quantidade <= 0) {
+                    System.out.println("Quantidade inválida!");
+                }
+            } catch (InputMismatchException e) {
                 System.out.println("Quantidade inválida!");
-                askRendimento();
             }
+        } while(quantidade <= 0);
 
-            this.rendimento = new Rendimento(quantidade, TipoRendimento.values()[tipoRendimento]);
-            return  this.rendimento;
 
-        } catch (InputMismatchException e) {
-            System.out.println("Rendimento inválido!");
-            askRendimento();
-        }
-
+        this.rendimento = new Rendimento(quantidade, TipoRendimento.values()[tipoRendimento]);
         return this.rendimento;
     }
 
@@ -154,7 +158,7 @@ public class NovaReceitaView {
                     if (quantidade <= 0) {
                         System.out.println("Quantidade inválida!");
                     }
-                } while(quantidade <= 0);
+                } while (quantidade <= 0);
 
                 this.ingredientes.add(new Ingrediente(nome, quantidade, TipoMedida.values()[tipoMedida]));
             } catch (InputMismatchException e) {
@@ -167,7 +171,7 @@ public class NovaReceitaView {
                 input = new Scanner(System.in).next().toUpperCase();
             } while (!input.equals("S") && !input.equals("N"));
 
-        } while(!input.equals("N"));
+        } while (!input.equals("N"));
 
         return this.ingredientes;
     }
@@ -192,7 +196,7 @@ public class NovaReceitaView {
                 input = new Scanner(System.in).next().toUpperCase();
             } while (!input.equals("S") && !input.equals("N"));
 
-        } while(!input.equals("N"));
+        } while (!input.equals("N"));
 
         return modoPreparo;
     }

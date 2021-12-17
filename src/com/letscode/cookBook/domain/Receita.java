@@ -53,13 +53,17 @@ public class Receita {
         String tempo = horas > 0 ? horas + " horas " : "";
         tempo += minutos > 0 ? minutos + " minutos " : "";
         StringBuilder ingredientes  = new StringBuilder();
-        for (Ingrediente ingrediente : this.ingredientes) {
-            ingredientes.append(" ").append(ingrediente.toString());
+        if (this.ingredientes != null) {
+            for (Ingrediente ingrediente : this.ingredientes) {
+                ingredientes.append(" ").append(ingrediente.toString());
+            }
         }
 
         StringBuilder modoPreparo = new StringBuilder();
-        for (String modo : this.modoPreparo) {
-            modoPreparo.append(" ").append(modo).append("\n");
+        if (this.modoPreparo != null) {
+            for (String modo : this.modoPreparo) {
+                modoPreparo.append(" ").append(modo).append("\n");
+            }
         }
 
         return String.format("%s%n\t%s%n%nRendimento: %s%nTempo: %s%nIngredientes:%n%sModo de preparo:%n%s", nome, categoria, rendimento, tempo, ingredientes, modoPreparo);

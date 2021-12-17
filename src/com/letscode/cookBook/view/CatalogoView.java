@@ -21,10 +21,10 @@ public class CatalogoView {
     boolean debug = true;
 
     public CatalogoView() {
-        if(debug) {
+        if (debug) {
 
             for (int i = 0; i < new Random().nextInt(10); i++) {
-                String nome = "Receita " + (i+1);
+                String nome = "Receita " + (i + 1);
                 Categoria categoria = Categoria.values()[new Random().nextInt(12)];
                 int tempoPreparo = new Random().nextInt(600);
                 Rendimento rendimento = new Rendimento(100, TipoRendimento.values()[new Random().nextInt(2)]);
@@ -81,7 +81,7 @@ public class CatalogoView {
         }
     }
 
-    private void add() throws NumberFormatException, InputMismatchException {
+    private void add() {
         Receita novaReceita = new NovaReceitaView().nova();
         if (curIndex < 0) {
             controller.add(novaReceita);
@@ -93,14 +93,26 @@ public class CatalogoView {
     }
 
     private void del() {
-        if (curIndex >= 0) {
-            controller.del(receita.getNome());
-            curIndex--;
-            if (curIndex < 0) {
-                this.receita = null;
+        if (curIndex == 0) {
+            if (controller.getReceita(curIndex + 1) != null) {
+                controller.del(receita.getNome());
+                this.receita = controller.getReceita(curIndex);
             } else {
+                controller.del(receita.getNome());
+                this.receita = null;
+                curIndex = -1;
+            }
+        } else if (curIndex > 0) {
+            if (controller.getReceita(curIndex + 1) != null) {
+                controller.del(receita.getNome());
+                this.receita = controller.getReceita(curIndex);
+            } else if (controller.getReceita(curIndex - 1) != null) {
+                controller.del(receita.getNome());
+                curIndex--;
                 this.receita = controller.getReceita(curIndex);
             }
+        } else if (curIndex == -1) {
+            System.out.println("Catálogo vazio!");
         }
     }
 
@@ -146,16 +158,28 @@ public class CatalogoView {
         do {
             option = new Scanner(System.in).next();
             switch (option.toUpperCase()) {
-                case "P" -> showAnterior();
-                case "N" -> showSeguinte();
-                case "+" -> add();
-                case "-" -> del();
-                case "S" -> search();
-                case "X" -> stop();
-                default -> {
+                case "P":
+                    showAnterior();
+                    break;
+                case "N":
+                    showSeguinte();
+                    break;
+                case "+":
+                    add();
+                    break;
+                case "-":
+                    del();
+                    break;
+                case "S":
+                    search();
+                    break;
+                case "X":
+                    stop();
+                    break;
+                default:
                     ScreenUtil.printTextLine("Opção inválida", 80);
                     ScreenUtil.printTextLine("#: ", 80);
-                }
+                    break;
             }
             loadView();
         } while (run);
