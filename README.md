@@ -14,8 +14,8 @@
 - [x] Fazer limpeza.
 - [x] Remover modo debug ou utilizar argumentos (args[]).
 
-//TODO - Melhorar entrada de ingredientes para reconhecer espaço entre os dígitos.
-
+- [ ] TODO - Melhorar entrada de ingredientes para reconhecer espaço entre os dígitos.
+- [ ] TODO - Tratar tempo de preparo em segundos (Microondas)
 
 
 
