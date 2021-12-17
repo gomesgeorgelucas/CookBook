@@ -172,7 +172,7 @@ public class NovaReceitaView {
             }
 
             do {
-                System.out.print("Novo ingrediente?(S/N)");
+                System.out.print("Novo ingrediente?(S/N): ");
                 input = new Scanner(System.in).next().toUpperCase();
             } while (!input.equals("S") && !input.equals("N"));
 
@@ -182,8 +182,28 @@ public class NovaReceitaView {
     }
 
     private List<String> askModoPreparo() {
-        System.out.println("Pede modo de preparo");
-        List<String> modoPreparo = new ArrayList<>();
+        System.out.println("Insira os passos do preparo.");
+        String modo = "";
+        String input = "";
+        do {
+            input = "";
+            do {
+                System.out.println("Insira passo: " + (this.modoPreparo.size() + 1));
+                modo = new Scanner(System.in).nextLine();
+                if (modo.isBlank()) {
+                    System.out.println("Passo inválido!");
+                }
+            } while (modo.isBlank());
+
+            this.modoPreparo.add(modo);
+
+            do {
+                System.out.print("Novo passo?(S/N): ");
+                input = new Scanner(System.in).next().toUpperCase();
+            } while (!input.equals("S") && !input.equals("N"));
+
+        } while(!input.equals("N"));
+
         return modoPreparo;
     }
 
