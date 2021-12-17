@@ -9,14 +9,6 @@ import com.letscode.cookBook.enums.TipoRendimento;
 
 import java.util.*;
 
-/**
- * String nome;
- * Categoria categoria;
- * int tempoPreparo;
- * Rendimento rendimento;
- * List<Ingrediente> ingredientes;
- * List<String> modoPreparo;
- */
 public class NovaReceitaView {
     Receita receita;
     String nome;
@@ -26,7 +18,7 @@ public class NovaReceitaView {
     List<Ingrediente> ingredientes = new ArrayList<>();
     List<String> modoPreparo = new ArrayList<>();
 
-    public Receita nova() {
+    public Receita nova() throws NumberFormatException, InputMismatchException {
         this.receita = new Receita(askNome(), askCategoria(), askTempoPreparo(),
                 askRendimento(), askIngredientes(), askModoPreparo());
         return receita;
@@ -44,7 +36,7 @@ public class NovaReceitaView {
     }
 
     private Categoria askCategoria() {
-        int categoria = 0;
+        int categoria;
         System.out.println("Qual a categoria da receita?");
         for (Categoria cat : Categoria.values()) {
             System.out.printf("%d - %s%n", cat.ordinal(), cat.name());
@@ -67,7 +59,7 @@ public class NovaReceitaView {
     }
 
     private int askTempoPreparo() {
-        String tempo = "";
+        String tempo;
         System.out.println("Qual o tempo de preparo em minutos?");
         tempo = new Scanner(System.in).nextLine();
 
@@ -93,8 +85,8 @@ public class NovaReceitaView {
 
     private Rendimento askRendimento() {
         System.out.println("Qual é o tipo de rendimento da receita?");
-        int tipoRendimento = 0;
-        int quantidade = 0;
+        int tipoRendimento;
+        int quantidade;
         for (TipoRendimento tipo : TipoRendimento.values()) {
             System.out.printf("%d - %s%n", tipo.ordinal(), tipo.name());
         }
@@ -129,11 +121,11 @@ public class NovaReceitaView {
     private List<Ingrediente> askIngredientes() {
         System.out.println("Inserir ingredientes.");
 
-        String nome = "";
-        double quantidade = 0;
-        int tipoMedida = 0;
+        String nome;
+        double quantidade;
+        int tipoMedida;
 
-        String input = "";
+        String input;
         do {
             input = "";
             do {
@@ -182,10 +174,9 @@ public class NovaReceitaView {
 
     private List<String> askModoPreparo() {
         System.out.println("Insira os passos do preparo.");
-        String modo = "";
-        String input = "";
+        String modo;
+        String input;
         do {
-            input = "";
             do {
                 System.out.println("Insira passo: " + (this.modoPreparo.size() + 1));
                 modo = new Scanner(System.in).nextLine();

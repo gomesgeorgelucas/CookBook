@@ -1,5 +1,6 @@
 package com.letscode.cookBook.view;
 
+@SuppressWarnings("unused")
 public class ScreenUtil {
 
     public static void printTextLine(String text) {

@@ -8,108 +8,44 @@ import com.letscode.cookBook.enums.Categoria;
 import com.letscode.cookBook.enums.TipoMedida;
 import com.letscode.cookBook.enums.TipoRendimento;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-import java.util.Scanner;
+import java.util.*;
 
+@SuppressWarnings("ConstantConditions")
 public class CatalogoView {
     private final Receita NONE_FOUND = new Receita("Nenhuma receita encontrada", Categoria.PRATO_UNICO);
     private Receita receita;
     Catalogo controller = new Catalogo();
     private int curIndex = -1;
+    boolean run = true;
 
     boolean debug = true;
 
     public CatalogoView() {
         if(debug) {
-            String nome = "Receita teste";
-            Categoria categoria = Categoria.CARNES;
-            int tempoPreparo = 100;
-            Rendimento rendimento = new Rendimento(100, TipoRendimento.COPOS);
-            List<Ingrediente> ingredientes = new ArrayList<>();
-            ingredientes.add(new Ingrediente("Ingrediente 1", 1.0, TipoMedida.GOTAS));
-            ingredientes.add(new Ingrediente("Ingrediente 2", 2.0, TipoMedida.CHICARAS));
-            ingredientes.add(new Ingrediente("Ingrediente 3", 3.0, TipoMedida.COLHERES_DE_SOPA));
-            ingredientes.add(new Ingrediente("Ingrediente 4", 4.0, TipoMedida.KILOS));
-            List<String> modoPreparo = new ArrayList<>();
-            modoPreparo.add("Passo 1 ");
-            modoPreparo.add("Passo 2 ".repeat(new Random().nextInt(10)));
-            modoPreparo.add("Passo 3 ".repeat(new Random().nextInt(10)));
-            modoPreparo.add("Passo 4 ".repeat(new Random().nextInt(10)));
-            Receita receita = new Receita(nome, categoria, tempoPreparo, rendimento, ingredientes, modoPreparo);
-            controller.add(receita);
 
-            this.receita = receita;
-            curIndex = 0;
+            for (int i = 0; i < new Random().nextInt(10); i++) {
+                String nome = "Receita " + (i+1);
+                Categoria categoria = Categoria.values()[new Random().nextInt(12)];
+                int tempoPreparo = new Random().nextInt(600);
+                Rendimento rendimento = new Rendimento(100, TipoRendimento.values()[new Random().nextInt(2)]);
+                List<Ingrediente> ingredientes = new ArrayList<>();
+                ingredientes.add(new Ingrediente("Ingrediente 1", Math.floor(new Random().nextDouble() * 60), TipoMedida.values()[new Random().nextInt(10)]));
+                ingredientes.add(new Ingrediente("Ingrediente 2", Math.floor(new Random().nextDouble() * 60), TipoMedida.values()[new Random().nextInt(10)]));
+                ingredientes.add(new Ingrediente("Ingrediente 3", Math.floor(new Random().nextDouble() * 60), TipoMedida.values()[new Random().nextInt(10)]));
+                ingredientes.add(new Ingrediente("Ingrediente 4", Math.floor(new Random().nextDouble() * 60), TipoMedida.values()[new Random().nextInt(10)]));
+                List<String> modoPreparo = new ArrayList<>();
+                modoPreparo.add("Passos ".repeat(new Random().nextInt(10)));
+                modoPreparo.add("Passos ".repeat(new Random().nextInt(10)));
+                modoPreparo.add("Passos ".repeat(new Random().nextInt(10)));
+                modoPreparo.add("Passos ".repeat(new Random().nextInt(10)));
+                Receita receita = new Receita(nome, categoria, tempoPreparo, rendimento, ingredientes, modoPreparo);
+                controller.add(receita);
 
-            nome = "Receita teste 2";
-            categoria = Categoria.AVES;
-            tempoPreparo = 100;
-            rendimento = new Rendimento(100, TipoRendimento.COPOS);
-            ingredientes = new ArrayList<>();
-            ingredientes.add(new Ingrediente("Ingrediente 1", 1.0, TipoMedida.GOTAS));
-            ingredientes.add(new Ingrediente("Ingrediente 2", 2.0, TipoMedida.CHICARAS));
-            ingredientes.add(new Ingrediente("Ingrediente 3", 3.0, TipoMedida.COLHERES_DE_SOPA));
-            ingredientes.add(new Ingrediente("Ingrediente 4", 4.0, TipoMedida.KILOS));
-            modoPreparo = new ArrayList<>();
-            modoPreparo.add("Passo 1 ");
-            modoPreparo.add("Passo 2 ".repeat(new Random().nextInt(10)));
-            modoPreparo.add("Passo 3 ".repeat(new Random().nextInt(10)));
-            modoPreparo.add("Passo 4 ".repeat(new Random().nextInt(10)));
-            receita = new Receita(nome, categoria, tempoPreparo, rendimento, ingredientes, modoPreparo);
-            controller.add(receita);
-
-            nome = "Receita teste 3";
-            categoria = Categoria.AVES;
-            tempoPreparo = 100;
-            rendimento = new Rendimento(100, TipoRendimento.COPOS);
-            ingredientes = new ArrayList<>();
-            ingredientes.add(new Ingrediente("Ingrediente 1", 1.0, TipoMedida.GOTAS));
-            ingredientes.add(new Ingrediente("Ingrediente 2", 2.0, TipoMedida.CHICARAS));
-            ingredientes.add(new Ingrediente("Ingrediente 3", 3.0, TipoMedida.COLHERES_DE_SOPA));
-            ingredientes.add(new Ingrediente("Ingrediente 4", 4.0, TipoMedida.KILOS));
-            modoPreparo = new ArrayList<>();
-            modoPreparo.add("Passo 1 ");
-            modoPreparo.add("Passo 2 ".repeat(new Random().nextInt(10)));
-            modoPreparo.add("Passo 3 ".repeat(new Random().nextInt(10)));
-            modoPreparo.add("Passo 4 ".repeat(new Random().nextInt(10)));
-            receita = new Receita(nome, categoria, tempoPreparo, rendimento, ingredientes, modoPreparo);
-            controller.add(receita);
-
-            nome = "Receita teste 4";
-            categoria = Categoria.AVES;
-            tempoPreparo = 100;
-            rendimento = new Rendimento(100, TipoRendimento.COPOS);
-            ingredientes = new ArrayList<>();
-            ingredientes.add(new Ingrediente("Ingrediente 1", 1.0, TipoMedida.GOTAS));
-            ingredientes.add(new Ingrediente("Ingrediente 2", 2.0, TipoMedida.CHICARAS));
-            ingredientes.add(new Ingrediente("Ingrediente 3", 3.0, TipoMedida.COLHERES_DE_SOPA));
-            ingredientes.add(new Ingrediente("Ingrediente 4", 4.0, TipoMedida.KILOS));
-            modoPreparo = new ArrayList<>();
-            modoPreparo.add("Passo 1 ");
-            modoPreparo.add("Passo 2 ".repeat(new Random().nextInt(10)));
-            modoPreparo.add("Passo 3 ".repeat(new Random().nextInt(10)));
-            modoPreparo.add("Passo 4 ".repeat(new Random().nextInt(10)));
-            receita = new Receita(nome, categoria, tempoPreparo, rendimento, ingredientes, modoPreparo);
-            controller.add(receita);
-
-            nome = "Receita teste 5";
-            categoria = Categoria.AVES;
-            tempoPreparo = 100;
-            rendimento = new Rendimento(100, TipoRendimento.COPOS);
-            ingredientes = new ArrayList<>();
-            ingredientes.add(new Ingrediente("Ingrediente 1", 1.0, TipoMedida.GOTAS));
-            ingredientes.add(new Ingrediente("Ingrediente 2", 2.0, TipoMedida.CHICARAS));
-            ingredientes.add(new Ingrediente("Ingrediente 3", 3.0, TipoMedida.COLHERES_DE_SOPA));
-            ingredientes.add(new Ingrediente("Ingrediente 4", 4.0, TipoMedida.KILOS));
-            modoPreparo = new ArrayList<>();
-            modoPreparo.add("Passo 1 ");
-            modoPreparo.add("Passo 2 ".repeat(new Random().nextInt(10)));
-            modoPreparo.add("Passo 3 ".repeat(new Random().nextInt(10)));
-            modoPreparo.add("Passo 4 ".repeat(new Random().nextInt(10)));
-            receita = new Receita(nome, categoria, tempoPreparo, rendimento, ingredientes, modoPreparo);
-            controller.add(receita);
+                if (i == 0) {
+                    this.receita = receita;
+                    curIndex = 0;
+                }
+            }
         }
     }
 
@@ -124,7 +60,6 @@ public class CatalogoView {
     }
 
     private void showReceita(Receita receita) {
-        //ScreenUtil.printTextLine(receita.toString(), 80, false, '=');
         System.out.println(receita.toString());
     }
 
@@ -146,7 +81,7 @@ public class CatalogoView {
         }
     }
 
-    private void add() {
+    private void add() throws NumberFormatException, InputMismatchException {
         Receita novaReceita = new NovaReceitaView().nova();
         if (curIndex < 0) {
             controller.add(novaReceita);
@@ -178,16 +113,17 @@ public class CatalogoView {
         ScreenUtil.printTextLine("+: Adicionar nova receita", 80, true);
         ScreenUtil.printTextLine("-: Remover receita", 80, true);
         ScreenUtil.printTextLine("S: Pesquisar receita", 80, true);
+        ScreenUtil.printTextLine("X: Sair", 80, true);
         ScreenUtil.printTextLine("", 80, true, '=');
         ScreenUtil.printTextLine("#: ", 80);
 
         if (debug) {
-            System.out.println("Curent Index: " + curIndex);
+            System.out.println("Current Index: " + curIndex);
         }
     }
 
     public void search() {
-        String nome = "";
+        String nome;
         System.out.print("Digite o nome da receita: ");
         nome = new Scanner(System.in).nextLine();
         Receita receita = controller.getReceita(nome);
@@ -200,32 +136,28 @@ public class CatalogoView {
 
     }
 
+    private void stop() {
+        this.run = false;
+    }
+
     public void show() {
         loadView();
         String option;
         do {
             option = new Scanner(System.in).next();
             switch (option.toUpperCase()) {
-                case "P":
-                    showAnterior();
-                    break;
-                case "N":
-                    showSeguinte();
-                    break;
-                case "+":
-                    add();
-                    break;
-                case "-":
-                    del();
-                    break;
-                case "S":
-                    search();
-                    break;
-                default:
+                case "P" -> showAnterior();
+                case "N" -> showSeguinte();
+                case "+" -> add();
+                case "-" -> del();
+                case "S" -> search();
+                case "X" -> stop();
+                default -> {
                     ScreenUtil.printTextLine("Opção inválida", 80);
                     ScreenUtil.printTextLine("#: ", 80);
+                }
             }
             loadView();
-        } while (true);
+        } while (run);
     }
 }

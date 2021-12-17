@@ -2,12 +2,11 @@ package com.letscode.cookBook.domain;
 
 import com.letscode.cookBook.enums.Categoria;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Receita {
-    private String nome;
-    private Categoria categoria;
+    private final String nome;
+    private final Categoria categoria;
     private int tempoPreparo;
     private Rendimento rendimento;
     private List<Ingrediente> ingredientes;
@@ -28,60 +27,8 @@ public class Receita {
         this.categoria = categoria;
     }
 
-    public Receita() {
-
-    }
-
     public String getNome() {
         return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public Categoria getCategoria() {
-        return categoria;
-    }
-
-    public void setCategoria(Categoria categoria) {
-        this.categoria = categoria;
-    }
-
-    public int getTempoPreparo() {
-        return tempoPreparo;
-    }
-
-    public void setTempoPreparo(int tempoPreparo) {
-        if (tempoPreparo <= 0) {
-            this.tempoPreparo = tempoPreparo;
-        }
-    }
-
-    public Rendimento getRendimento() {
-        return rendimento;
-    }
-
-    public void setRendimento(Rendimento rendimento) {
-        this.rendimento = rendimento;
-    }
-
-    public List<Ingrediente> getIngredientes() {
-        return ingredientes;
-    }
-
-    public void setIngredientes(Ingrediente[] ingredientes) {
-        for (Ingrediente item : ingredientes) {
-            this.ingredientes.add(item);
-        }
-    }
-
-    public List<String> getModoPreparo() {
-        return modoPreparo;
-    }
-
-    public void setModoPreparo(String modoPreparo) {
-        this.modoPreparo.add(modoPreparo);
     }
 
     @Override
@@ -99,30 +46,20 @@ public class Receita {
         return nome.hashCode();
     }
 
-    public String toString2() {
-        int segundos = tempoPreparo % 60;
-        int minutos = tempoPreparo > 60 ? tempoPreparo % (60*60) : 0;
-        int horas = tempoPreparo > 60*60 ? tempoPreparo % (60*60*24) : 0;
-        String tempo = horas > 0 ? horas + " horas " : "";
-        tempo += minutos > 0 ? minutos + " minutos " : "";
-        tempo += segundos > 0 ? segundos + " segundos " : "";
-        return String.format("%s%n\t%s%n%nRendimento: %s%nTempo: %s%nIngredientes:%n%s%nModo de preparo:%n%s", nome, categoria, rendimento, tempo, ingredientes, modoPreparo);
-    }
-
     @Override
     public String toString() {
         int minutos = tempoPreparo  < 60 ? tempoPreparo : tempoPreparo % 60;
         int horas = tempoPreparo >= 60 ? tempoPreparo / 60 : 0;
         String tempo = horas > 0 ? horas + " horas " : "";
         tempo += minutos > 0 ? minutos + " minutos " : "";
-        String ingredientes  = "";
+        StringBuilder ingredientes  = new StringBuilder();
         for (Ingrediente ingrediente : this.ingredientes) {
-            ingredientes += " " + ingrediente.toString();
+            ingredientes.append(" ").append(ingrediente.toString());
         }
 
-        String modoPreparo = "";
+        StringBuilder modoPreparo = new StringBuilder();
         for (String modo : this.modoPreparo) {
-            modoPreparo += " " + modo.toString()+ "\n";
+            modoPreparo.append(" ").append(modo).append("\n");
         }
 
         return String.format("%s%n\t%s%n%nRendimento: %s%nTempo: %s%nIngredientes:%n%sModo de preparo:%n%s", nome, categoria, rendimento, tempo, ingredientes, modoPreparo);

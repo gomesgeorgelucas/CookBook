@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Random;
 
 public class Catalogo {
-    private List<Receita> receitas;
+    private final List<Receita> receitas;
 
     public Catalogo() {
         receitas = new ArrayList<>();
@@ -48,7 +48,7 @@ public class Catalogo {
 
     /**
      * Returns index of recipe.
-     * @param receita
+     * @param receita Object Receita
      * @return -1 if not found.
      */
     public int getIndex(Receita receita) {
@@ -58,6 +58,7 @@ public class Catalogo {
         return -1;
     }
 
+    @SuppressWarnings("unused")
     public Receita getRandom() {
         if (receitas.isEmpty()) return null;
 
