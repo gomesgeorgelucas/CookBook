@@ -4,10 +4,9 @@ import com.letscode.cookBook.domain.Ingrediente;
 import com.letscode.cookBook.domain.Receita;
 import com.letscode.cookBook.domain.Rendimento;
 import com.letscode.cookBook.enums.Categoria;
+import com.letscode.cookBook.enums.TipoRendimento;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 /**
  * String nome;
@@ -18,26 +17,23 @@ import java.util.Scanner;
  * List<String> modoPreparo;
  */
 public class NovaReceitaView {
-    Scanner scanner;
     Receita receita;
     String nome;
-
-    public NovaReceitaView() {
-        this.scanner = new Scanner(System.in);
-    }
+    Categoria categoria;
+    int tempoPreparo;
+    Rendimento rendimento;
+    List<Ingrediente> ingredientes;
+    List<String> modoPreparo;
 
     public Receita nova() {
-        this.receita = new Receita(askNome(), askCategoria());
-        this.receita.setTempoPreparo(askTempoPreparo());
-        this.receita.setRendimento(askRendimento());
-        this.receita.getIngredientes().addAll(askIngredientes());
-        this.receita.getModoPreparo().addAll(askModoPreparo());
+        this.receita = new Receita(askNome(), askCategoria(), askTempoPreparo(),
+                askRendimento(), askIngredientes(), askModoPreparo());
         return receita;
     }
 
     private String askNome() {
         System.out.println("Qual o nome da receita?");
-        nome = scanner.nextLine();
+        nome = new Scanner(System.in).nextLine();
         if (nome.isBlank()) {
             System.out.println("Nome inválido!");
             askNome();
@@ -47,27 +43,86 @@ public class NovaReceitaView {
     }
 
     private Categoria askCategoria() {
+        int categoria = 0;
         System.out.println("Qual a categoria da receita?");
         for (Categoria cat : Categoria.values()) {
-            System.out.printf("%d - %s", cat.ordinal(), cat.name());
+            System.out.printf("%d - %s%n", cat.ordinal(), cat.name());
         }
-        int categoria = scanner.nextInt();
-        if (categoria < 0 || categoria >= Categoria.values().length) {
+        try {
+            categoria = new Scanner(System.in).nextInt();
+
+            if (categoria < 0 || categoria >= Categoria.values().length) {
+                System.out.println("Categoria inválida!");
+                askCategoria();
+            }
+            this.categoria = Categoria.values()[categoria];
+            return this.categoria;
+        } catch (InputMismatchException e) {
             System.out.println("Categoria inválida!");
             askCategoria();
         }
-        return Categoria.values()[categoria];
+
+        return this.categoria;
     }
 
     private int askTempoPreparo() {
-        System.out.println("Pede tempo preparo");
-        return 0;
+        String tempo = "";
+        System.out.println("Qual o tempo de preparo em minutos?");
+        tempo = new Scanner(System.in).nextLine();
+
+        if (tempo.isBlank()) {
+            System.out.println("Tempo inválido! Tente novamente!");
+            askTempoPreparo();
+        }
+
+        try {
+            this.tempoPreparo = Integer.parseInt(tempo);
+            if (this.tempoPreparo < 0) {
+                System.out.println("Tempo inválido! Tente novamente!");
+                askTempoPreparo();
+            }
+        } catch (NumberFormatException e) {
+            System.out.println("Tempo inválido! Tente novamente!");
+            this.tempoPreparo = 0;
+            askTempoPreparo();
+        }
+
+        return this.tempoPreparo;
     }
 
     private Rendimento askRendimento() {
-        System.out.println("Pede rendimento");
-        Rendimento rendimento = null;
-        return rendimento;
+        System.out.println("Qual é o tipo de rendimento da receita?");
+        int tipoRendimento = 0;
+        int quantidade = 0;
+        for (TipoRendimento tipo : TipoRendimento.values()) {
+            System.out.printf("%d - %s%n", tipo.ordinal(), tipo.name());
+        }
+        try {
+            tipoRendimento = new Scanner(System.in).nextInt();
+
+            if (tipoRendimento < 0 || tipoRendimento >= Categoria.values().length) {
+                System.out.println("Tipo inválido!");
+                askRendimento();
+            }
+
+            System.out.println("Qual é a quantidade de " + TipoRendimento.values()[tipoRendimento].name() + "?");
+
+            quantidade = new Scanner(System.in).nextInt();
+
+            if (quantidade <= 0) {
+                System.out.println("Quantidade inválida!");
+                askRendimento();
+            }
+
+            this.rendimento = new Rendimento(quantidade, TipoRendimento.values()[tipoRendimento]);
+            return  this.rendimento;
+
+        } catch (InputMismatchException e) {
+            System.out.println("Rendimento inválido!");
+            askRendimento();
+        }
+
+        return this.rendimento;
     }
 
     private List<Ingrediente> askIngredientes() {

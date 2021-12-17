@@ -13,11 +13,23 @@ public class Receita {
     private List<Ingrediente> ingredientes;
     private List<String> modoPreparo;
 
+    public Receita(String nome, Categoria categoria, int tempoPreparo, Rendimento rendimento,
+                   List<Ingrediente> ingredientes, List<String> modoPreparo) {
+        this.nome = nome.toUpperCase();
+        this.categoria = categoria;
+        this.tempoPreparo = tempoPreparo;
+        this.rendimento = rendimento;
+        this.ingredientes = ingredientes;
+        this.modoPreparo = modoPreparo;
+    }
+
     public Receita(String nome, Categoria categoria) {
-        this.ingredientes = new ArrayList<>();
         this.nome = nome;
         this.categoria = categoria;
-        this.modoPreparo = new ArrayList<>();
+    }
+
+    public Receita() {
+
     }
 
     public String getNome() {
@@ -41,7 +53,9 @@ public class Receita {
     }
 
     public void setTempoPreparo(int tempoPreparo) {
-        this.tempoPreparo = tempoPreparo;
+        if (tempoPreparo <= 0) {
+            this.tempoPreparo = tempoPreparo;
+        }
     }
 
     public Rendimento getRendimento() {
@@ -85,14 +99,24 @@ public class Receita {
         return nome.hashCode();
     }
 
+//    @Override
+//    public String toString() {
+//        int segundos = tempoPreparo % 60;
+//        int minutos = tempoPreparo > 60 ? tempoPreparo % (60*60) : 0;
+//        int horas = tempoPreparo > 60*60 ? tempoPreparo % (60*60*24) : 0;
+//        String tempo = horas > 0 ? horas + " horas " : "";
+//        tempo += minutos > 0 ? minutos + " minutos " : "";
+//        tempo += segundos > 0 ? segundos + " segundos " : "";
+//        return String.format("%s%n\t%s%n%nRendimento: %s%nTempo: %s%nIngredientes:%n%s%nModo de preparo:%n%s", nome, categoria, rendimento, tempo, ingredientes, modoPreparo);
+//    }
+
     @Override
     public String toString() {
-        int segundos = tempoPreparo % 60;
-        int minutos = tempoPreparo > 60 ? tempoPreparo % (60*60) : 0;
-        int horas = tempoPreparo > 60*60 ? tempoPreparo % (60*60*24) : 0;
+        int minutos = tempoPreparo  < 60 ? tempoPreparo : tempoPreparo % 60;
+        int horas = tempoPreparo >= 60 ? tempoPreparo / 60 : 0;
         String tempo = horas > 0 ? horas + " horas " : "";
         tempo += minutos > 0 ? minutos + " minutos " : "";
-        tempo += segundos > 0 ? segundos + " segundos " : "";
         return String.format("%s%n\t%s%n%nRendimento: %s%nTempo: %s%nIngredientes:%n%s%nModo de preparo:%n%s", nome, categoria, rendimento, tempo, ingredientes, modoPreparo);
     }
 }
+

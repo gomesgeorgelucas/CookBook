@@ -24,7 +24,7 @@ public class CatalogoView {
     }
 
     private void showReceita(Receita receita) {
-        System.out.println(receita);
+        System.out.println(receita.toString());
     }
 
     private void showAnterior() {
